@@ -1,4 +1,5 @@
 ﻿using Windows.ApplicationModel;
+using KrossKlient.ViewModels;
 using ReactiveUI;
 using Splat;
 
@@ -20,6 +21,11 @@ namespace KrossKlient.Services
 
         }
 
+        public HomePageViewModel PuzzlesViewModel
+        {
+            get
+            {
+                return new HomePageViewModel(Resolver.GetService<IPuzzleRepository>(), Resolver.GetService<IUserService>());
+            }
+        }
         public IMutableDependencyResolver Resolver { get; set; }
-    }
-}
