@@ -1,5 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
+using KrossKlient.DataModel;
 using KrossKlient.Services;
 using ReactiveUI;
 
@@ -8,18 +10,22 @@ namespace KrossKlient.ViewModels
     [DataContract]
     public class HomePageViewModel : ReactiveObject
     {
-        [DataMember]private IPuzzleRepository _puzzleRepository;
+        private IPuzzleRepository _puzzleRepository;
         public IPuzzleRepository PuzzleRepository
         {
             get { return _puzzleRepository; }
             private set { _puzzleRepository = value; }
         }
 
-        [DataMember]private IUserService _userService;        
+        private IUserService _userService;        
         public IUserService UserService
         {
             get { return _userService; }
             private set { _userService = value; }
+        }
+
+        public HomePageViewModel()
+        {
         }
 
         public HomePageViewModel(IPuzzleRepository puzzleRepository, IUserService userService)
@@ -28,42 +34,38 @@ namespace KrossKlient.ViewModels
             UserService = userService;
         }
 
-
+        [DataMember] private string _currentUser;
         public string CurrentUser
         {
             get { return _currentUser; }
-            set { SetProperty(ref _currentUser, value); }
+            set { this.RaiseAndSetIfChanged(ref _currentUser, value); }
         }
 
+        [DataMember] private ObservableCollection<PuzzleGroupViewModel> _puzzles;
         public ObservableCollection<PuzzleGroupViewModel> PuzzleGroupViewModels
         {
             get { return _puzzles; }
             set
             {
-                SetProperty(ref _puzzles, value);
+                this.RaiseAndSetIfChanged(ref _puzzles, value);
             }
         }
 
-        public RelayCommand<PuzzleViewModel> StartPuzzleCommand { get; private set; }
-
+        [DataMember] private PuzzleViewModel _selectedPuzzleViewModel;
         public PuzzleViewModel SelectedPuzzleGroupViewModel
         {
             get { return _selectedPuzzleViewModel; }
             set
             {
-                SetProperty(ref _selectedPuzzleViewModel, value);
+                this.RaiseAndSetIfChanged(ref _selectedPuzzleViewModel, value);
             }
         }
 
-        public object SelectedValueBinding
-        {
-            get { return _selectedValueBinding; }
-        }
-
+        [DataMember] private List<PuzzleGroup> _puzzleGroupData;
         public List<PuzzleGroup> PuzzleGroupData
         {
             get { return _puzzleGroupData; }
-            set { SetProperty(ref _puzzleGroupData, value); }
+            set { this.RaiseAndSetIfChanged(ref _puzzleGroupData, value); }
         }
 
     }

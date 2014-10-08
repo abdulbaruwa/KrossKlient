@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using KrossKlient.Common;
 using ReactiveUI;
 
 namespace KrossKlient.ViewModels

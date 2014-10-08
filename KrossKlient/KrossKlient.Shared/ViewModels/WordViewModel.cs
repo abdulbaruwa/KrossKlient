@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Serialization;
+using KrossKlient.Common;
 using ReactiveUI;
 
 namespace KrossKlient.ViewModels

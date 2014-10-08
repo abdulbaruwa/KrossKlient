@@ -1,4 +1,5 @@
 ﻿using System;
+using KrossKlient.Common;
 using ReactiveUI;
 
 namespace KrossKlient.ViewModels
@@ -81,19 +82,5 @@ namespace KrossKlient.ViewModels
             if (obj.GetType() != this.GetType()) return false;
             return Equals((EmptyCellViewModel)obj);
         }
-    }
-
-    public enum CellState
-    {
-        IsEmpty,
-        IsUsed,
-        IsActive,
-        IsError
-    }
-
-    public enum Direction
-    {
-        Down,
-        Across
     }
 }

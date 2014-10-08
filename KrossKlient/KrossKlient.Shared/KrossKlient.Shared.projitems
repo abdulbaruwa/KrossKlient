@@ -16,6 +16,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\BoardCanvas.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\BooleanToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\PuzzleGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SampleDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IPuzzleRepository.cs" />
@@ -26,8 +28,17 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\UserService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\ViewModelLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CellViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DesignTime\DesignCellViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DesignTime\DesignPuzzleBoardViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DesignTime\DesignPuzzlesVm.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DesignTime\DesignTimeHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DesignTime\FakePuzzleRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DesignTime\FakePuzzlesService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EmptyCellViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\HomePageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PuzzleBoardViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PuzzleGroupViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\PuzzleViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SelectedWordViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\WordViewModel.cs" />
     <Content Include="$(MSBuildThisFileDirectory)DataModel\SampleData.json" />
