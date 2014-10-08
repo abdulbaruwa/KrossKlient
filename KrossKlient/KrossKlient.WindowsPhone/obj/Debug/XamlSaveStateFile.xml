@@ -1,13 +1,13 @@
 <XamlCompilerSaveState>
   <ReferenceAssemblyList>
     <LocalAssembly PathName="d:\development\ongithub\krossklient\krossklient\krossklient.windowsphone\obj\debug\intermediatexaml\krossklient.windowsphone.exe" HashGuid="35134853-bffe-2743-2984-306775e86ad2" />
-    <ReferenceAssembly PathName="d:\development\ongithub\krossklient\packages\reactiveui-core.6.1.0\lib\portable-win81+wpa81\reactiveui.dll" HashGuid="c728057e-9167-3b10-b548-cd2ac409c6cb" />
-    <ReferenceAssembly PathName="d:\development\ongithub\krossklient\packages\splat.1.5.0\lib\portable-win81+wpa81\splat.dll" HashGuid="2b9b01ec-399f-ca50-ecee-8f5d457c03c2" />
-    <ReferenceAssembly PathName="d:\development\ongithub\krossklient\packages\rx-core.2.2.5\lib\portable-win81+wpa81\system.reactive.core.dll" HashGuid="e88ff990-7aa8-b77f-93a1-598ee1f64e5f" />
-    <ReferenceAssembly PathName="d:\development\ongithub\krossklient\packages\rx-interfaces.2.2.5\lib\portable-win81+wpa81\system.reactive.interfaces.dll" HashGuid="2fd855ee-8440-f81f-a427-ceb8eb15ce8f" />
-    <ReferenceAssembly PathName="d:\development\ongithub\krossklient\packages\rx-linq.2.2.5\lib\portable-win81+wpa81\system.reactive.linq.dll" HashGuid="415e3b50-c164-f753-1f27-a0a2efe20748" />
-    <ReferenceAssembly PathName="d:\development\ongithub\krossklient\packages\rx-platformservices.2.2.5\lib\portable-win81+wpa81\system.reactive.platformservices.dll" HashGuid="af6ba9ad-5f77-bdaa-1d18-22248e6f3c99" />
-    <ReferenceAssembly PathName="d:\development\ongithub\krossklient\packages\rx-xaml.2.2.5\lib\portable-win81+wpa81\system.reactive.windows.threading.dll" HashGuid="ad9f6df3-b720-f08a-1701-8ca9a78f3972" />
-    <ReferenceAssembly PathName="d:\development\ongithub\krossklient\packages\rx-winrt.2.2.5\lib\portable-win81+wpa81\system.reactive.windowsruntime.dll" HashGuid="3fc8426b-72ec-9454-ae66-a5dcbb0480e2" />
+    <ReferenceAssembly PathName="c:\development\ongithub\krossklient\packages\reactiveui-core.6.1.0\lib\portable-win81+wpa81\reactiveui.dll" HashGuid="c728057e-9167-3b10-b548-cd2ac409c6cb" />
+    <ReferenceAssembly PathName="c:\development\ongithub\krossklient\packages\splat.1.5.0\lib\portable-win81+wpa81\splat.dll" HashGuid="2b9b01ec-399f-ca50-ecee-8f5d457c03c2" />
+    <ReferenceAssembly PathName="c:\development\ongithub\krossklient\packages\rx-core.2.2.5\lib\portable-win81+wpa81\system.reactive.core.dll" HashGuid="e88ff990-7aa8-b77f-93a1-598ee1f64e5f" />
+    <ReferenceAssembly PathName="c:\development\ongithub\krossklient\packages\rx-interfaces.2.2.5\lib\portable-win81+wpa81\system.reactive.interfaces.dll" HashGuid="2fd855ee-8440-f81f-a427-ceb8eb15ce8f" />
+    <ReferenceAssembly PathName="c:\development\ongithub\krossklient\packages\rx-linq.2.2.5\lib\portable-win81+wpa81\system.reactive.linq.dll" HashGuid="415e3b50-c164-f753-1f27-a0a2efe20748" />
+    <ReferenceAssembly PathName="c:\development\ongithub\krossklient\packages\rx-platformservices.2.2.5\lib\portable-win81+wpa81\system.reactive.platformservices.dll" HashGuid="af6ba9ad-5f77-bdaa-1d18-22248e6f3c99" />
+    <ReferenceAssembly PathName="c:\development\ongithub\krossklient\packages\rx-xaml.2.2.5\lib\portable-win81+wpa81\system.reactive.windows.threading.dll" HashGuid="ad9f6df3-b720-f08a-1701-8ca9a78f3972" />
+    <ReferenceAssembly PathName="c:\development\ongithub\krossklient\packages\rx-winrt.2.2.5\lib\portable-win81+wpa81\system.reactive.windowsruntime.dll" HashGuid="3fc8426b-72ec-9454-ae66-a5dcbb0480e2" />
   </ReferenceAssemblyList>
 </XamlCompilerSaveState>

@@ -1,1 +1,1 @@
-D:\Development\OnGithub\KrossKlient\KrossKlient\KrossKlient.Windows\KrossKlient.Windows.csproj;neutral
+C:\Development\OnGithub\KrossKlient\KrossKlient\KrossKlient.Windows\KrossKlient.Windows.csproj;neutral

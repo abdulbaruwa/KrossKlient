@@ -8,7 +8,72 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="Assets/HubBackground.png"/>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                    <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="{x:Null}"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+
+            <!-- Grid-appropriate item template as seen in section 2 -->
+            <DataTemplate x:Key="Standard200x180TileItemTemplate">
+                <Grid Margin="0,0,9.5,9.5" Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}">
+                    <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}" Height="138.5" Width="138.5"/>
+                    <TextBlock Text="{Binding Title}" VerticalAlignment="Bottom" Margin="9.5,0,0,6.5" Style="{ThemeResource BaseTextBlockStyle}"/>
+                </Grid>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid>
-        <TextBlock FontSize="26" Margin="50">Home Page</TextBlock>
+        <Hub Header="Kross" SectionHeaderClick="SectionHeader_Click">
+            <HubSection MinWidth="600" Header="Latest">
+                <DataTemplate>
+                    <GridView
+                        Margin="0,9.5,0,0"
+                        ItemsSource="{Binding Items}"
+                        AutomationProperties.AutomationId="ItemGridView"
+                        AutomationProperties.Name="Items In Group"
+                        ItemTemplate="{StaticResource Standard200x180TileItemTemplate}"
+                        SelectionMode="None"
+                        IsItemClickEnabled="True"
+                        ItemClick="ItemView_ItemClick"
+                        ContinuumNavigationTransitionInfo.ExitElementContainer="True">
+                        <GridView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsWrapGrid />
+                            </ItemsPanelTemplate>
+                        </GridView.ItemsPanel>
+                    </GridView>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection Header="Tech" IsHeaderInteractive="True"  
+                Background="#222222" MinWidth="250">
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="Tech news goes here."
+                           Style="{ThemeResource BodyTextBlockStyle}" />
+                        <TextBlock Text="Click the header to go to the Tech page."
+                           Style="{ThemeResource BodyTextBlockStyle}" />
+                    </StackPanel>
+                </DataTemplate>
+            </HubSection>
+
+            <HubSection Header="Sports" IsHeaderInteractive="True" 
+                Background="#444444" MinWidth="250">
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="Sports news goes here."
+                           Style="{ThemeResource BodyTextBlockStyle}" />
+                        <TextBlock Text="Click the header to go to the Sports page." 
+                           Style="{ThemeResource BodyTextBlockStyle}" />
+                    </StackPanel>
+                </DataTemplate>
+            </HubSection>
+        </Hub>
     </Grid>
 </Page>

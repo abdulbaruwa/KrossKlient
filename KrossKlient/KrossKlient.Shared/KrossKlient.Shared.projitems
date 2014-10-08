@@ -18,6 +18,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\BoardCanvas.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\PuzzleGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SampleDataSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IPuzzleRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IPuzzlesService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\IUserService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\PuzzleRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\PuzzlesService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\UserService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\ViewModelLocator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CellViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EmptyCellViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\HomePageViewModel.cs" />

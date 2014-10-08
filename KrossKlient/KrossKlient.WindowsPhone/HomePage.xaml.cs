@@ -35,5 +35,15 @@ namespace KrossKlient
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }
+
+        private void SectionHeader_Click(object sender, HubSectionHeaderClickEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
