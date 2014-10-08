@@ -99,35 +99,35 @@ namespace KrossKlient.ViewModels.DesignTime
 
             //var wordsInserted = result.Item1.Where(x => x.inserted);
             var wordviewmodels = new List<WordViewModel>();
-            //foreach (var word in wordsInserted)
-            //{
-            //    int position = (word.row*12) + word.col;
+            foreach (var word in wordsInserted)
+            {
+                int position = (word.row * 12) + word.col;
 
-            //    CoreHorizontal.resultCell word1 = word;
-            //    var wordViewModel = new WordViewModel
-            //    {
-            //        Cells = new ObservableCollection<CellEmptyViewModel>(),
-            //        Direction = GetDirection(word.orientation),
-            //        Word = word.word,
-            //        WordHint = words.First(x => x.Key == word1.word).Value,
-            //        WordLength = "(" + word.word.Length.ToString() + ")",
-            //        Index = position
-            //    };
+                CoreHorizontal.resultCell word1 = word;
+                var wordViewModel = new WordViewModel
+                {
+                    Cells = new ObservableCollection<CellEmptyViewModel>(),
+                    Direction = GetDirection(word.orientation),
+                    Word = word.word,
+                    WordHint = words.First(x => x.Key == word1.word).Value,
+                    WordLength = "(" + word.word.Length.ToString() + ")",
+                    Index = position
+                };
 
-            //    var row = word.row;
-            //    var col = word.col;
-            //    foreach (var character in word.word)
-            //    {
-            //        var cell = new CellViewModel(col, row, character.ToString(), wordViewModel, string.Empty);
-            //        if (word.orientation == CoreHorizontal.Orientation.horizontal)
-            //            col += 1;
-            //        else
-            //            row += 1;
+                var row = word.row;
+                var col = word.col;
+                foreach (var character in word.word)
+                {
+                    var cell = new CellViewModel(col, row, character.ToString(), wordViewModel, string.Empty);
+                    if (word.orientation == CoreHorizontal.Orientation.horizontal)
+                        col += 1;
+                    else
+                        row += 1;
 
-            //        wordViewModel.Cells.Add(cell);
-            //    }
-            //    wordviewmodels.Add((wordViewModel));
-            //}
+                    wordViewModel.Cells.Add(cell);
+                }
+                wordviewmodels.Add((wordViewModel));
+            }
             return wordviewmodels;
         }
 
