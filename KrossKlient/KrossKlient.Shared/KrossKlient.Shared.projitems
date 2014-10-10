@@ -20,6 +20,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\Enums.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\PuzzleGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SampleDataSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Board.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\Cell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\InsertWordResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IPuzzleRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IPuzzlesService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\IUserService.cs" />
