@@ -23,6 +23,13 @@ namespace KrossTests.BuilderTests
         }
 
         [TestMethod]
+        public void QuickTest()
+        {
+            var x = new ViewModelLocator();
+            var y = x.PuzzleBoardViewModel;
+        }
+
+        [TestMethod]
         public void AddNewWordToBoard()
         {
             var board = new Board(12);

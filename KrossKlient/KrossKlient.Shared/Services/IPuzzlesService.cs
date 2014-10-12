@@ -8,6 +8,5 @@ namespace KrossKlient.Services
     {
         ObservableCollection<WordViewModel> GetOrdereredWordsForPuzzle(int puzzleId, string user);
         IList<WordViewModel> GetWordsInsertableIntoPuzzle(Dictionary<string, string> words);
-        string[,] GetEmptyBoard();
     }
 }

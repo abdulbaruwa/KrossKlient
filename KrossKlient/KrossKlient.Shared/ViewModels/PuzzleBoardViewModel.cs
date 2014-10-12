@@ -10,28 +10,32 @@ namespace KrossKlient.ViewModels
     [DataContract]
     public class PuzzleBoardViewModel : ReactiveObject
     {
+        private readonly IUserService UserService;
         private readonly ObservableCollection<EmptyCellViewModel> _cells;
+        protected IPuzzlesService PuzzlesService;
+        [DataMember] private bool _acrossAndDownVisible;
+        [DataMember] private EmptyCellViewModel _currentSelectedCell;
         [DataMember] private string _currentUser;
         [DataMember] private string _gameCountDown;
         [DataMember] private bool _gameIsRunning;
         [DataMember] private string _gameScoreDisplay;
-
-        private readonly IUserService UserService;
-        protected IPuzzlesService PuzzlesService;
+        [DataMember] private ObservableCollection<WordViewModel> _words;
+        [DataMember] private PuzzleViewModel _puzzleViewModel;
 
         public PuzzleBoardViewModel()
         {
+            _cells = new ObservableCollection<EmptyCellViewModel>();
             CreateCellsForBoard();
         }
 
         public PuzzleBoardViewModel(IPuzzlesService puzzlesService, IUserService userService)
         {
+            _cells = new ObservableCollection<EmptyCellViewModel>();
             CreateCellsForBoard();
             PuzzlesService = puzzlesService;
             UserService = userService;
-        }
 
-        public PuzzleViewModel PuzzleViewModel { get; set; }
+        }
 
         public ObservableCollection<EmptyCellViewModel> Cells
         {
@@ -43,7 +47,6 @@ namespace KrossKlient.ViewModels
             get { return _currentUser; }
             set { this.RaiseAndSetIfChanged(ref _currentUser, value); }
         }
-
 
         public bool GameIsRunning
         {
@@ -63,12 +66,42 @@ namespace KrossKlient.ViewModels
             set { this.RaiseAndSetIfChanged(ref _gameScoreDisplay, value); }
         }
 
-        [DataMember] private ObservableCollection<WordViewModel> _words;
         public ObservableCollection<WordViewModel> Words
         {
             get { return _words; }
             set { this.RaiseAndSetIfChanged(ref _words, value); }
         }
+
+        public bool AcrossAndDownVisible
+        {
+            get { return _acrossAndDownVisible; }
+            set { this.RaiseAndSetIfChanged(ref _acrossAndDownVisible, value); }
+        }
+
+        public EmptyCellViewModel CurrentSelectedCell
+        {
+            get { return _currentSelectedCell; }
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _currentSelectedCell, value);
+                //SetLikelyWordMatchOnBoardForSelectedCell(value);
+            }
+        }
+
+
+        public PuzzleViewModel PuzzleViewModel 
+        {
+            get { return _puzzleViewModel; }
+            set { this.RaiseAndSetIfChanged(ref _puzzleViewModel, value); }
+        }
+
+        //private publicliclic PuzzleViewModel 
+
+        //private PuzzleViewModel 
+        //{
+        //    get;
+        //    set;
+        //}
 
         private void CreateCellsForBoard()
         {
@@ -93,7 +126,7 @@ namespace KrossKlient.ViewModels
                 {
                     string startPositionForWordOnBoard = string.Empty;
 
-                    int cellPositionOnBoard = (cell.Row * 12) + cell.Col;
+                    int cellPositionOnBoard = (cell.Row*12) + cell.Col;
                     if (!firstCellVisited) startPositionForWordOnBoard = wordViewModel.Index.ToString();
                     firstCellVisited = true;
 
@@ -101,6 +134,5 @@ namespace KrossKlient.ViewModels
                 }
             }
         }
-
     }
 }

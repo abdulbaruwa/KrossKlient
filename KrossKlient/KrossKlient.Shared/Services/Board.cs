@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using KrossKlient.Common;
 
 namespace KrossKlient.Services
 {
@@ -75,9 +76,10 @@ namespace KrossKlient.Services
                 InsertWordResults.Add(new InsertWordResult()
                 {
                     Inserted = true,
-                    IsVertical = false,
+                    Direction = Direction.Across,
                     StartCell = Tuple.Create(0, 0),
-                    EndCell = Tuple.Create(0, word.Length-1)
+                    EndCell = Tuple.Create(0, word.Length-1),
+                    Word = word
                 });
 
                 return true;
@@ -159,7 +161,7 @@ namespace KrossKlient.Services
                 Inserted = letterMatch && !letterMismatch,
                 StartCell = Tuple.Create(row, currentCol),
                 EndCell = Tuple.Create(currentRow, currentCol),
-                Word = word
+                Word = word.ToString()
             };
 
             insertResult.Inserted = ValidateSuffixRule(insertResult);
@@ -309,10 +311,10 @@ namespace KrossKlient.Services
                     InsertWordResults.Add(new InsertWordResult()
                     {
                         Inserted = true,
-                        IsVertical = false,
+                        Direction = Direction.Across,
                         StartCell = Tuple.Create(cell.Row, cell.Col-startCol),
-                        EndCell = Tuple.Create(cell.Row, cell.Col + wordToInsert.Length)
-
+                        EndCell = Tuple.Create(cell.Row, cell.Col + wordToInsert.Length),
+                        Word = wordToInsert
                     });
                     return canWordBeAddedFromCellPosVerticallyResult;
                 }
@@ -336,10 +338,10 @@ namespace KrossKlient.Services
                     InsertWordResults.Add(new InsertWordResult()
                     {
                         Inserted=true,
-                        IsVertical = true,
+                        Direction = Direction.Down,
                         StartCell = Tuple.Create(cell.Row - startrow, cell.Col),
-                        EndCell = Tuple.Create(cell.Row + wordToInsert.Length, cell.Col)
-
+                        EndCell = Tuple.Create(cell.Row + wordToInsert.Length, cell.Col),
+                        Word = wordToInsert
                     });
                     return canWordBeAddedFromCellPosVerticallyResult;
                 }

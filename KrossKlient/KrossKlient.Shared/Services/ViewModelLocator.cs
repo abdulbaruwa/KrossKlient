@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using Windows.ApplicationModel;
 using KrossKlient.ViewModels;
+using KrossKlient.ViewModels.DesignTime;
 using Splat;
 
 namespace KrossKlient.Services
@@ -25,7 +26,38 @@ namespace KrossKlient.Services
             get { return GetHomePageViewModel(); }
         }
 
+        public PuzzleBoardViewModel PuzzleBoardViewModel
+        {
+            get
+            {
+                return GetPuzzleBoardViewModel();
+            }
+        }
+
         public IMutableDependencyResolver Resolver { get; set; }
+
+        private PuzzleBoardViewModel GetPuzzleBoardViewModel()
+        {
+            var vm = new PuzzleBoardViewModel(new FakePuzzlesService(), new FakeUserSevice());
+
+            vm.CurrentUser = "Abdulrahaman";
+
+            vm.PuzzleViewModel = new PuzzleViewModel() { Group = "Science", Title = "Level One" };
+            vm.Words = new FakePuzzlesService().GetOrdereredWordsForPuzzle(0, vm.CurrentUser);
+
+            //SelectedWord = (from word in Words
+            //                   where word.Word.Equals("india",StringComparison.OrdinalIgnoreCase)
+            //                   select word).FirstOrDefault();
+
+            vm.GameIsRunning = true;
+
+            vm.GameCountDown = "00:00:00";
+
+            vm.AcrossAndDownVisible = true;
+
+            vm.AddWordsToBoard();
+            return vm;
+        }
 
         private HomePageViewModel GetHomePageViewModel()
         {
