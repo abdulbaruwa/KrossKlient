@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Search;
 using KrossKlient.Services;
+using KrossKlient.ViewModels;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
 namespace KrossTests.BuilderTests
@@ -271,7 +272,35 @@ namespace KrossTests.BuilderTests
 
             List<string> result = board.ProcessWords(wordlist.ToArray());
             PrintBoard(board);
-        }        
+        }
+
+        [TestMethod]
+        public void ShouldBuildOldViewModelData()
+        {
+            Dictionary<string, string> words = new Dictionary<string, string>
+            {
+                {"Bamidele", "Adetoro's first name. Rashedat omo Abdulrahaman Adedayo Baruwa and Rasheedat Patience Binta OluwaFunmilayo Baruwa. Sister to Abdulrasheed Ademola Dabira Adedayo Baruwa "},
+                {"station", "place where i fit get train"},
+                {"india", "Origin of my favourite curry, spicy hot tropical country. With loads and loads of people. Probably the second most populated country Origin of my favourite curry, spicy hot tropical country. With loads and loads of people. Probably the second most populated country"},
+                {"Adams", "Captain Arsenal"},
+                {"fards", "show off"},
+                {"novemb", "like november"},
+                {"belt", "Tied around my waist"},
+                {"train", "Mode of transportation"},
+                {"adeola", "My sister"},
+                {"amoeba", "Single cell organism"},
+                {"moscow", "Cold city behind iron curtain"}
+            };
+
+            var board = new Board(12);
+            var failed = board.ProcessWords(words.Keys.ToArray());
+            var result = board.InsertWordResults;
+
+            PrintBoard(board);
+            var wordsInserted = result.Where(x => x.Inserted);
+            Assert.AreEqual(result.Count, wordsInserted.Count());
+            Assert.IsTrue((failed.Count  + result.Count) == words.Count);
+        }
         
         [TestMethod]
         public void ShouldNotAddWordVerticallyIfMatchPositionOverunsGrid()
