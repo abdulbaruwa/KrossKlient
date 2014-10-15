@@ -306,14 +306,14 @@ namespace KrossKlient.Services
                 var canWordBeAddedFromCellPosVerticallyResult = CanWordBeAddedFromCellPosHorizontally(cell, wordArray);
                 if (canWordBeAddedFromCellPosVerticallyResult.Item1 && ValidateAround(cell, canWordBeAddedFromCellPosVerticallyResult.Item2, wordArray, AcrosVertical.Across))
                 {
-                    var startCol = canWordBeAddedFromCellPosVerticallyResult.Item2 - wordToInsert.Length;
+                    var startCol = cell.Col - canWordBeAddedFromCellPosVerticallyResult.Item2;
                     InsertWordHorizontally(cell, canWordBeAddedFromCellPosVerticallyResult.Item2, wordArray);
                     InsertWordResults.Add(new InsertWordResult()
                     {
                         Inserted = true,
                         Direction = Direction.Across,
-                        StartCell = Tuple.Create(cell.Row, cell.Col-startCol),
-                        EndCell = Tuple.Create(cell.Row, cell.Col + wordToInsert.Length),
+                        StartCell = Tuple.Create(cell.Row, startCol),
+                        EndCell = Tuple.Create(cell.Row, startCol + wordToInsert.Length-1),
                         Word = wordToInsert
                     });
                     return canWordBeAddedFromCellPosVerticallyResult;
