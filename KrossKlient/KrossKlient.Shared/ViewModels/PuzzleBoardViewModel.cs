@@ -21,6 +21,8 @@ namespace KrossKlient.ViewModels
         [DataMember] private string _gameScoreDisplay;
         [DataMember] private ObservableCollection<WordViewModel> _words;
         [DataMember] private PuzzleViewModel _puzzleViewModel;
+        [DataMember] private bool _wordSelectedVisibility;
+        [DataMember] private WordViewModel _selectedWord;
 
         public PuzzleBoardViewModel()
         {
@@ -88,11 +90,22 @@ namespace KrossKlient.ViewModels
             }
         }
 
-
         public PuzzleViewModel PuzzleViewModel 
         {
             get { return _puzzleViewModel; }
             set { this.RaiseAndSetIfChanged(ref _puzzleViewModel, value); }
+        }
+
+        public bool WordSelectedVisibility
+        {
+            get { return _wordSelectedVisibility; }
+            set { this.RaiseAndSetIfChanged(ref _wordSelectedVisibility, value); }
+        }
+
+        public WordViewModel SelectedWord
+        {
+            get { return _selectedWord; }
+            set { this.RaiseAndSetIfChanged(ref _selectedWord, value); }
         }
 
         //private publicliclic PuzzleViewModel 

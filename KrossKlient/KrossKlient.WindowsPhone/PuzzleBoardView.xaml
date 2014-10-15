@@ -11,6 +11,9 @@
    >
     
 <Page.Resources>
+        <common:BooleanToCellShadeConverter x:Key="BoolToCellShade" />
+        <common:BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
         <Style x:Key="BasicTextStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{StaticResource ApplicationForegroundThemeBrush}"/>
             <Setter Property="FontSize" Value="{StaticResource ControlContentThemeFontSize}"/>
@@ -145,42 +148,97 @@
         </Style>
     </Page.Resources>
     <Grid>
-        <ItemsControl ItemsSource="{Binding Cells}" Background="Transparent"
+        <Grid.Background>
+            <ImageBrush ImageSource="ms-appx:///Assets/Landscapes30.png" />
+        </Grid.Background>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <ItemsControl Grid.Row="0" ItemsSource="{Binding Cells}" Background="Transparent"
                       Margin="10">
-           <ItemsControl.ItemsPanel>
-               <ItemsPanelTemplate>
-                    <common:BoardCanvas/>
-                </ItemsPanelTemplate>
-           </ItemsControl.ItemsPanel> 
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderThickness =".5" BorderBrush="BlueViolet"
-                            Height="30" Width="30" CornerRadius="1">
-                        <Grid Opacity="90">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="*" />
-                            </Grid.RowDefinitions>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <common:BoardCanvas/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness =".5" BorderBrush="Green"
+                            Height="30" Width="30" CornerRadius="3"
+                            Background="{Binding IsVisible, Converter={StaticResource BoolToCellShade}}"
+                            
+                            >
+                            <Grid Opacity="90">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding WordPosition}"
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="{Binding WordPosition}"
                                                        FontSize="7"
                                                        Foreground="Gray" Padding="0" VerticalAlignment="Top"
                                                        HorizontalAlignment="Left" />
-                            <TextBlock Grid.ColumnSpan="3" FontFamily="Segoi" FontSize="16"
+                                <TextBlock Grid.ColumnSpan="3" FontFamily="Segoi" FontSize="16"
                                                        Foreground="Red"
                                                        VerticalAlignment="Top" Padding="0" HorizontalAlignment="Center"
                                                        Text="{Binding EnteredValue}" Grid.RowSpan="3"
                                                        Margin="5,2,14,0" />
-                        </Grid>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <ItemsControl
+                        Visibility="{Binding GameIsRunning,Converter={StaticResource BoolToVisibilityConverter}}"
+                        x:Name="wordselected" ItemsSource="{Binding SelectedWord.Cells}" Grid.Row="1"
+                        Margin="10,0,10,0" Opacity="0.85">
+                <ItemsControl.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <RepositionThemeTransition />
+                    </TransitionCollection>
+                </ItemsControl.ItemContainerTransitions>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness=".5">
+                            <Grid
+                                        Background="{Binding IsVisible, Converter={StaticResource BoolToCellShade},Mode=TwoWay}"
+                                        Width="48.5"
+                                        Height="48.5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.ColumnSpan="3" FontFamily="Segoi" FontSize="32"
+                                                   Foreground="Red"
+                                                   VerticalAlignment="Top" Padding="0" HorizontalAlignment="Center"
+                                                   Text="{Binding EnteredValue}" Grid.RowSpan="3"
+                                                   Margin="13,7,14,0" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+        
     </Grid>
 </Page>
