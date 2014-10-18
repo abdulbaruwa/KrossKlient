@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Windows.ApplicationModel;
 using KrossKlient.ViewModels;
 using KrossKlient.ViewModels.DesignTime;
@@ -45,9 +47,9 @@ namespace KrossKlient.Services
             vm.PuzzleViewModel = new PuzzleViewModel() { Group = "Science", Title = "Level One" };
             vm.Words = new FakePuzzlesService().GetOrdereredWordsForPuzzle(0, vm.CurrentUser);
 
-            //SelectedWord = (from word in Words
-            //                   where word.Word.Equals("india",StringComparison.OrdinalIgnoreCase)
-            //                   select word).FirstOrDefault();
+            vm.SelectedWord = (from word in vm.Words
+                               where word.Word.Equals("india",StringComparison.OrdinalIgnoreCase)
+                               select word).FirstOrDefault();
 
             vm.GameIsRunning = true;
 

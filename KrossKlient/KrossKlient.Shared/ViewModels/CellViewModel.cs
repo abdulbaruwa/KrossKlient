@@ -4,6 +4,12 @@ using ReactiveUI;
 
 namespace KrossKlient.ViewModels
 {
+    public interface ILoginMethods
+    {
+        void SaveCredentials(string userName = null);
+    }
+
+
     [DataContract]
     public class CellViewModel : EmptyCellViewModel
     {

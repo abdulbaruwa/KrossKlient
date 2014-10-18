@@ -154,11 +154,12 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <ItemsControl Grid.Row="0" ItemsSource="{Binding Cells}" Background="Transparent"
-                      Margin="10">
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Cells}" Background="Transparent"
+                      Margin="10,10,10,30">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <common:BoardCanvas/>
@@ -198,9 +199,9 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
             <ItemsControl
-                        Visibility="{Binding GameIsRunning,Converter={StaticResource BoolToVisibilityConverter}}"
-                        x:Name="wordselected" ItemsSource="{Binding SelectedWord.Cells}" Grid.Row="1"
-                        Margin="10,0,10,0" Opacity="0.85">
+                        Visibility="Visible"
+                        x:Name="wordselected" ItemsSource="{Binding SelectedWord.Cells}" Grid.Row="2"
+                        Margin="10,10,10,0" Opacity="0.85" Height="40" VerticalAlignment="Top">
                 <ItemsControl.ItemContainerTransitions>
                     <TransitionCollection>
                         <RepositionThemeTransition />
@@ -215,9 +216,9 @@
                     <DataTemplate>
                         <Border BorderThickness=".5">
                             <Grid
-                                        Background="{Binding IsVisible, Converter={StaticResource BoolToCellShade},Mode=TwoWay}"
-                                        Width="48.5"
-                                        Height="48.5">
+                                 Background="{Binding IsVisible, Converter={StaticResource BoolToCellShade},Mode=TwoWay}"
+                                        Width="30"
+                                        Height="44.5">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="*" />
@@ -238,7 +239,9 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </Grid>
-        
+
+            <TextBlock Margin="10" 
+                       Text="Show a description for the selected text" Grid.Row="3"></TextBlock>
+        </Grid>        
     </Grid>
 </Page>

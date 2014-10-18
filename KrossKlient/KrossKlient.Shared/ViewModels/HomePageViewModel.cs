@@ -4,11 +4,12 @@ using System.Runtime.Serialization;
 using KrossKlient.DataModel;
 using KrossKlient.Services;
 using ReactiveUI;
+using Splat;
 
 namespace KrossKlient.ViewModels
 {
     [DataContract]
-    public class HomePageViewModel : ReactiveObject
+    public class HomePageViewModel : ReactiveObject, ILoginMethods
     {
         private IPuzzleRepository _puzzleRepository;
         public IPuzzleRepository PuzzleRepository
@@ -24,14 +25,21 @@ namespace KrossKlient.ViewModels
             private set { _userService = value; }
         }
 
-        public HomePageViewModel()
+        public HomePageViewModel(IMutableDependencyResolver testResolver = null)
         {
+            if (testResolver == null)
+            {
+                PuzzleRepository = Locator.Current.GetService<IPuzzleRepository>();
+                UserService = Locator.Current.GetService<IUserService>();
+            }
         }
 
         public HomePageViewModel(IPuzzleRepository puzzleRepository, IUserService userService)
         {
             PuzzleRepository = puzzleRepository;
             UserService = userService;
+            Resolver = Locator.CurrentMutable;
+
         }
 
         [DataMember] private string _currentUser;
@@ -68,5 +76,9 @@ namespace KrossKlient.ViewModels
             set { this.RaiseAndSetIfChanged(ref _puzzleGroupData, value); }
         }
 
+        public void SaveCredentials(string userName = null)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
