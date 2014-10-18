@@ -18,7 +18,6 @@ namespace KrossKlient.DataModel
         public bool GamePlayed { get; set; }
         public int GameScore { get; set; }
         public Dictionary<string, string> Words { get; set; }
-        public List<PuzzleGame> PuzzleGames { get; set; }
     }
 
     public class PuzzleGame

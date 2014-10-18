@@ -159,7 +159,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <ItemsControl Grid.Row="1" ItemsSource="{Binding Cells}" Background="Transparent"
-                      Margin="10,10,10,30">
+                      Margin="10,10,10,0">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <common:BoardCanvas/>
@@ -201,7 +201,7 @@
             <ItemsControl
                         Visibility="Visible"
                         x:Name="wordselected" ItemsSource="{Binding SelectedWord.Cells}" Grid.Row="2"
-                        Margin="10,10,10,0" Opacity="0.85" Height="40" VerticalAlignment="Top">
+                        Margin="10,30,10,0" Opacity="0.85" Height="40" VerticalAlignment="Top">
                 <ItemsControl.ItemContainerTransitions>
                     <TransitionCollection>
                         <RepositionThemeTransition />

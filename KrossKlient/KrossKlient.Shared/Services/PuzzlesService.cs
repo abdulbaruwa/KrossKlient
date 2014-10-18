@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using KrossKlient.Common;
+using KrossKlient.DataModel;
 using KrossKlient.ViewModels;
 
 namespace KrossKlient.Services
@@ -41,6 +42,11 @@ namespace KrossKlient.Services
             {
                 throw;
             }
+        }
+
+        public IList<PuzzleGroup> GetPuzzlesForUser(string currentUser)
+        {
+            throw new NotImplementedException();
         }
 
         private ObservableCollection<WordViewModel> SortWordsByPositionOnBoard(List<WordViewModel> wordviewmodels)

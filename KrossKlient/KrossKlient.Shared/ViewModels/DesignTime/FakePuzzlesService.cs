@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using KrossKlient.Common;
+using KrossKlient.DataModel;
 using KrossKlient.Services;
 
 namespace KrossKlient.ViewModels.DesignTime
@@ -36,6 +37,11 @@ namespace KrossKlient.ViewModels.DesignTime
         }
 
         public IList<WordViewModel> GetWordsInsertableIntoPuzzle(Dictionary<string, string> words)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<PuzzleGroup> GetPuzzlesForUser(string currentUser)
         {
             throw new NotImplementedException();
         }

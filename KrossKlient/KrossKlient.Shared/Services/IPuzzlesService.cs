@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using KrossKlient.DataModel;
 using KrossKlient.ViewModels;
 
 namespace KrossKlient.Services
@@ -8,5 +9,6 @@ namespace KrossKlient.Services
     {
         ObservableCollection<WordViewModel> GetOrdereredWordsForPuzzle(int puzzleId, string user);
         IList<WordViewModel> GetWordsInsertableIntoPuzzle(Dictionary<string, string> words);
+        IList<PuzzleGroup> GetPuzzlesForUser(string currentUser);
     }
 }

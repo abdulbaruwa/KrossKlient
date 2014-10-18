@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Windows.ApplicationModel;
+using KrossKlient.DataModel;
 using KrossKlient.ViewModels;
 using KrossKlient.ViewModels.DesignTime;
 using Splat;
@@ -63,8 +65,8 @@ namespace KrossKlient.Services
 
         private HomePageViewModel GetHomePageViewModel()
         {
-            var puzzles = new ObservableCollection<PuzzleGroupViewModel>();
-            var sciencegroup = new PuzzleGroupViewModel {Category = "Science", Puzzles = new ObservableCollection<PuzzleViewModel>()};
+            var puzzles = new ObservableCollection<PuzzleGroup>();
+            var sciencegroup = new PuzzleGroup { Name = "Science", Puzzles = new List<PuzzleSubGroup>()};
 
             sciencegroup.Puzzles.Add(PuzzleBuilder("Human Skeleton Puzzles"));
             sciencegroup.Puzzles.Add(PuzzleBuilder("Resperatory System"));
@@ -73,11 +75,13 @@ namespace KrossKlient.Services
             puzzles.Add(sciencegroup);
 
 
-            var englishgroup = new PuzzleGroupViewModel {Category = "English", Puzzles = new ObservableCollection<PuzzleViewModel>()};
+            var englishgroup = new PuzzleGroup {Name = "English", Puzzles = new List<PuzzleSubGroup>() };
+
             englishgroup.Puzzles.Add(PuzzleBuilder("English Vocabs Puzzles"));
             englishgroup.Puzzles.Add(PuzzleBuilder("Grammer"));
             puzzles.Add(englishgroup);
-            var geographygroup = new PuzzleGroupViewModel {Category = "Geography", Puzzles = new ObservableCollection<PuzzleViewModel>()};
+
+            var geographygroup = new PuzzleGroup { Name = "Geography", Puzzles = new List<PuzzleSubGroup>() };
             geographygroup.Puzzles.Add(PuzzleBuilder("Rivers Puzzles"));
             geographygroup.Puzzles.Add(PuzzleBuilder("Tectonic Plates Puzzles"));
             geographygroup.Puzzles.Add(PuzzleBuilder("Polution Puzzles"));
@@ -87,21 +91,20 @@ namespace KrossKlient.Services
             return homePageViewModel;
         }
 
-        public PuzzleViewModel PuzzleBuilder(string title)
+        public PuzzleSubGroup PuzzleBuilder(string title)
         {
-            var puzzleVm = new PuzzleViewModel
+            var puzzleVm = new PuzzleSubGroup()
             {
                 Title = title,
-                Group = "My Group",
-                Words =
-                    new List<string>
-                    {
-                        "First",
-                        "Second",
-                        "Third",
-                        "Forth",
-                        "Fifth",
-                        "Sixth"
+                Words = new Dictionary<string, string>
+                {
+                    
+                        {"First","The first"},
+                        {"Second", "The Second"},
+                        {"Third", "The Third"},
+                        {"Forth", "The Forth"},
+                        {"Fifth", "The Fifth"},
+                        {"Sixth", "The Sixth"}
                     }
             };
             return puzzleVm;

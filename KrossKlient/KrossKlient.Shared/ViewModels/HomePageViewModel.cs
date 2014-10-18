@@ -38,8 +38,6 @@ namespace KrossKlient.ViewModels
         {
             PuzzleRepository = puzzleRepository;
             UserService = userService;
-            Resolver = Locator.CurrentMutable;
-
         }
 
         [DataMember] private string _currentUser;
@@ -49,8 +47,8 @@ namespace KrossKlient.ViewModels
             set { this.RaiseAndSetIfChanged(ref _currentUser, value); }
         }
 
-        [DataMember] private ObservableCollection<PuzzleGroupViewModel> _puzzles;
-        public ObservableCollection<PuzzleGroupViewModel> PuzzleGroupViewModels
+        [DataMember] private ObservableCollection<PuzzleGroup> _puzzles;
+        public ObservableCollection<PuzzleGroup> PuzzleGroupViewModels
         {
             get { return _puzzles; }
             set
@@ -79,6 +77,12 @@ namespace KrossKlient.ViewModels
         public void SaveCredentials(string userName = null)
         {
             throw new System.NotImplementedException();
+        }
+
+        private void FetchLatestGames()
+        {
+            var service = Locator.Current.GetService<IPuzzlesService>();
+            service.GetPuzzlesForUser(CurrentUser);
         }
     }
 }
