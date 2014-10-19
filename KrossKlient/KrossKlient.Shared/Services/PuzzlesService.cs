@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reactive.Linq;
+using Akavache;
 using KrossKlient.Common;
 using KrossKlient.DataModel;
 using KrossKlient.ViewModels;
+using ReactiveUI;
+using Splat;
 
 namespace KrossKlient.Services
 {
@@ -13,11 +17,13 @@ namespace KrossKlient.Services
     {
         private IPuzzleRepository puzzlesRepository;
         private IUserService _userService;
+        private readonly IBlobCache _blobCache;
 
-        public PuzzlesService(IPuzzleRepository puzzlesRepository, IUserService userService)
+        public PuzzlesService(IPuzzleRepository puzzlesRepository,  IUserService userService, IBlobCache blobCache = null)
         {
             this.puzzlesRepository = puzzlesRepository;
             _userService = userService;
+            _blobCache = blobCache ?? Locator.Current.GetService<IBlobCache>();
         }
 
         public ObservableCollection<WordViewModel> GetOrdereredWordsForPuzzle(int puzzleId, string user)
@@ -44,9 +50,10 @@ namespace KrossKlient.Services
             }
         }
 
-        public IList<PuzzleGroup> GetPuzzlesForUser(string currentUser)
+        public IObservable<List<PuzzleGroup>> GetPuzzlesForUser(string currentUser)
         {
-            throw new NotImplementedException();
+            IObservable<List<PuzzleGroup>> observableResult = _blobCache.GetObject<List<PuzzleGroup>>("MyGames");
+            return observableResult;
         }
 
         private ObservableCollection<WordViewModel> SortWordsByPositionOnBoard(List<WordViewModel> wordviewmodels)

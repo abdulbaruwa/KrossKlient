@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.Generic;
+using System.Reactive.Linq;
 using System.Runtime.Serialization;
 using KrossKlient.DataModel;
 using KrossKlient.Services;
@@ -11,11 +12,11 @@ namespace KrossKlient.ViewModels
     [DataContract]
     public class HomePageViewModel : ReactiveObject, ILoginMethods
     {
-        private IPuzzleRepository _puzzleRepository;
-        public IPuzzleRepository PuzzleRepository
+        private IPuzzlesService _puzzlesService;
+        public IPuzzlesService PuzzlesService
         {
-            get { return _puzzleRepository; }
-            private set { _puzzleRepository = value; }
+            get { return _puzzlesService; }
+            private set { _puzzlesService = value; }
         }
 
         private IUserService _userService;        
@@ -29,16 +30,11 @@ namespace KrossKlient.ViewModels
         {
             if (testResolver == null)
             {
-                PuzzleRepository = Locator.Current.GetService<IPuzzleRepository>();
+                PuzzlesService = Locator.Current.GetService<IPuzzlesService>();
                 UserService = Locator.Current.GetService<IUserService>();
             }
         }
 
-        public HomePageViewModel(IPuzzleRepository puzzleRepository, IUserService userService)
-        {
-            PuzzleRepository = puzzleRepository;
-            UserService = userService;
-        }
 
         [DataMember] private string _currentUser;
         public string CurrentUser
@@ -47,13 +43,13 @@ namespace KrossKlient.ViewModels
             set { this.RaiseAndSetIfChanged(ref _currentUser, value); }
         }
 
-        [DataMember] private ObservableCollection<PuzzleGroup> _puzzles;
-        public ObservableCollection<PuzzleGroup> PuzzleGroupViewModels
+        [DataMember] private ReactiveList<PuzzleGroup> _puzzleGroups;
+        public ReactiveList<PuzzleGroup> PuzzleGroups
         {
-            get { return _puzzles; }
+            get { return _puzzleGroups; }
             set
             {
-                this.RaiseAndSetIfChanged(ref _puzzles, value);
+                this.RaiseAndSetIfChanged(ref _puzzleGroups, value);
             }
         }
 
@@ -82,7 +78,15 @@ namespace KrossKlient.ViewModels
         private void FetchLatestGames()
         {
             var service = Locator.Current.GetService<IPuzzlesService>();
-            service.GetPuzzlesForUser(CurrentUser);
+            service.GetPuzzlesForUser(CurrentUser).ObserveOn(RxApp.MainThreadScheduler)
+            .Subscribe(x =>
+            {
+                if (x != null)
+                {
+                    if(x.Count > 0)PuzzleGroups.AddRange(x);
+                }
+            },
+                ex => this.Log().Info("No game stats"));
         }
     }
 }

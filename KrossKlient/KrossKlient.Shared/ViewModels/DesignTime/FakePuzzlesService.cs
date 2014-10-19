@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reactive.Linq;
 using KrossKlient.Common;
 using KrossKlient.DataModel;
 using KrossKlient.Services;
@@ -41,9 +42,58 @@ namespace KrossKlient.ViewModels.DesignTime
             throw new NotImplementedException();
         }
 
-        public IList<PuzzleGroup> GetPuzzlesForUser(string currentUser)
+        public IObservable<List<PuzzleGroup>> GetPuzzlesForUser(string currentUser)
         {
-            throw new NotImplementedException();
+            var puzzles = new List<PuzzleGroup>();
+            var sciencegroup = new PuzzleGroup { Name = "Science", Puzzles = new List<PuzzleSubGroup>() };
+
+            sciencegroup.Puzzles.Add(PuzzleBuilder("Human Skeleton Puzzles"));
+            sciencegroup.Puzzles.Add(PuzzleBuilder("Resperatory System"));
+            sciencegroup.Puzzles.Add(PuzzleBuilder("Muscle System"));
+
+            puzzles.Add(sciencegroup);
+
+            var englishgroup = new PuzzleGroup { Name = "English", Puzzles = new List<PuzzleSubGroup>() };
+
+            englishgroup.Puzzles.Add(PuzzleBuilder("English Vocabs Puzzles"));
+            englishgroup.Puzzles.Add(PuzzleBuilder("Grammer"));
+            puzzles.Add(englishgroup);
+
+            var geographygroup = new PuzzleGroup { Name = "Geography", Puzzles = new List<PuzzleSubGroup>() };
+            geographygroup.Puzzles.Add(PuzzleBuilder("Rivers Puzzles"));
+            geographygroup.Puzzles.Add(PuzzleBuilder("Tectonic Plates Puzzles"));
+            geographygroup.Puzzles.Add(PuzzleBuilder("Polution Puzzles"));
+            geographygroup.Puzzles.Add(PuzzleBuilder("Volcanoes Puzzles"));
+            puzzles.Add(geographygroup);
+
+            IObservable<List<PuzzleGroup>> observable = Observable.Create<List<PuzzleGroup>>(o =>
+            {
+                o.OnNext(puzzles);
+                o.OnCompleted();
+                return () => {}
+                ;
+            });
+
+            return observable;
+        }
+
+        public PuzzleSubGroup PuzzleBuilder(string title)
+        {
+            var puzzleVm = new PuzzleSubGroup()
+            {
+                Title = title,
+                Words = new Dictionary<string, string>
+                {
+
+                    {"First", "The first"},
+                    {"Second", "The Second"},
+                    {"Third", "The Third"},
+                    {"Forth", "The Forth"},
+                    {"Fifth", "The Fifth"},
+                    {"Sixth", "The Sixth"}
+                }
+            };
+            return puzzleVm;
         }
 
         public string[,] GetEmptyBoard()

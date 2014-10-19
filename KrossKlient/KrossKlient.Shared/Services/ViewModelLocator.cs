@@ -87,7 +87,7 @@ namespace KrossKlient.Services
             geographygroup.Puzzles.Add(PuzzleBuilder("Polution Puzzles"));
             geographygroup.Puzzles.Add(PuzzleBuilder("Volcanoes Puzzles"));
             puzzles.Add(geographygroup);
-            var homePageViewModel = new HomePageViewModel {CurrentUser = "Ademola Baruwa", PuzzleGroupViewModels = puzzles};
+            var homePageViewModel = new HomePageViewModel {CurrentUser = "Ademola Baruwa", PuzzleGroups = puzzles};
             return homePageViewModel;
         }
 
