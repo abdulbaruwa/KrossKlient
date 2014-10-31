@@ -71,7 +71,7 @@
     </Page.Resources>
     <Grid>
         <Hub x:Name="Hub" x:Uid="Hub" Header="Kross" Background="{ThemeResource HubBackgroundImageBrush}" >
-            <HubSection MinWidth="600" Header="{Binding Name}"
+            <HubSection x:Name="HubSection1" MinWidth="600" Header="{Binding Name}"
                DataContext="{Binding PuzzleGroups[0]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                        <ListView 
@@ -87,7 +87,7 @@
                 </DataTemplate>
             </HubSection>
 
-            <HubSection MinWidth="600" Header="{Binding Name}"
+            <HubSection x:Name="HubSection2" MinWidth="600" Header="{Binding Name}"
                DataContext="{Binding PuzzleGroups[1]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView 
@@ -103,7 +103,7 @@
                 </DataTemplate>
             </HubSection>
 
-            <HubSection MinWidth="600" Header="{Binding Name}"
+            <HubSection x:Name="HubSection3" MinWidth="600" Header="{Binding Name}"
                DataContext="{Binding PuzzleGroups[2]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
                     <ListView 

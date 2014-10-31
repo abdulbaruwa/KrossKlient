@@ -22,6 +22,17 @@ namespace KrossKlient
             navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
             //Bindings
+            //Hub Section 0
+            this.Bind(ViewModel, x => x.PuzzleGroups[0], x => x.HubSection1.DataContext);
+            this.Bind(ViewModel, x => x.PuzzleGroups[0].Name, x => x.HubSection1.Header);
+
+            //Hub Section 1
+            this.OneWayBind(ViewModel, x => x.PuzzleGroups[1], x => x.HubSection2.DataContext);
+            this.Bind(ViewModel, x => x.PuzzleGroups[1].Name, x => x.HubSection2.Header);
+
+            //Hub Section 2
+            this.OneWayBind(ViewModel, x => x.PuzzleGroups[2], x => x.HubSection3.DataContext);
+            this.Bind(ViewModel, x => x.PuzzleGroups[2].Name, x => x.HubSection3.Header);
 
         }
 

@@ -15,11 +15,14 @@ namespace KrossKlient.ViewModels
     {
         public HomePageViewModel(IMutableDependencyResolver testResolver = null)
         {
+            //_puzzleGroups = new ReactiveList<PuzzleGroup>();
             //Blobcache
             Akavache.BlobCache.ApplicationName = "Kross";
             RegisterResolver(testResolver);
             //log stuff
             // Get credentials
+
+            FetchLatestGames();
         }
 
         private void RegisterResolver(IMutableDependencyResolver testResolver)
@@ -27,7 +30,7 @@ namespace KrossKlient.ViewModels
             if (testResolver == null)
             {
                 Resolver = Locator.CurrentMutable;
-                Resolver.Register(() => new PuzzlesService(), typeof(IPuzzlesService));
+                Resolver.Register(() => new FakePuzzlesService(), typeof(IPuzzlesService));
                 Resolver.Register(() => new UserService(), typeof(IUserService)); 
                 Resolver.Register(() => new FakePuzzleRepository(), typeof(IPuzzleRepository));
             }
@@ -61,8 +64,8 @@ namespace KrossKlient.ViewModels
             set { this.RaiseAndSetIfChanged(ref _currentUser, value); }
         }
 
-        [DataMember] private ReactiveList<PuzzleGroup> _puzzleGroups;
-        public ReactiveList<PuzzleGroup> PuzzleGroups
+        [DataMember] private List<PuzzleGroup> _puzzleGroups;
+        public List<PuzzleGroup> PuzzleGroups
         {
             get { return _puzzleGroups; }
             set
@@ -101,7 +104,12 @@ namespace KrossKlient.ViewModels
             {
                 if (x != null)
                 {
-                    if(x.Count > 0)PuzzleGroups.AddRange(x);
+                    if (x.Count > 0)
+                    {
+                        var result = new List<PuzzleGroup>();
+                        result.AddRange(x);
+                        PuzzleGroups = result;
+                    }
                 }
             },
                 ex => this.Log().Info("No game stats"));

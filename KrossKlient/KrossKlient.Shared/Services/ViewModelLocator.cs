@@ -66,7 +66,7 @@ namespace KrossKlient.Services
 
         private HomePageViewModel GetHomePageViewModel()
         {
-            var puzzles = new ReactiveList<PuzzleGroup>();
+            var puzzles = new List<PuzzleGroup>();
             var sciencegroup = new PuzzleGroup { Name = "Science", Puzzles = new List<PuzzleSubGroup>()};
 
             sciencegroup.Puzzles.Add(PuzzleBuilder("Human Skeleton Puzzles"));
