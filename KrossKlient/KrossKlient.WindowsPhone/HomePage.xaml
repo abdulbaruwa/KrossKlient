@@ -1,6 +1,6 @@
 ﻿<Page
     x:Class="KrossKlient.HomePage"
-    d:DataContext="{Binding HomePageViewModel, Source={d:DesignInstance Type=services:ViewModelLocator, IsDesignTimeCreatable=True}}"
+    d:DataContext="{Binding AppBootstrapperViewModel, Source={d:DesignInstance Type=services:ViewModelLocator, IsDesignTimeCreatable=True}}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:KrossKlient"

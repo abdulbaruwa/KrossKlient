@@ -4,6 +4,7 @@ using System.Reactive.Linq;
 using System.Runtime.Serialization;
 using KrossKlient.DataModel;
 using KrossKlient.Services;
+using KrossKlient.ViewModels.DesignTime;
 using ReactiveUI;
 using Splat;
 
@@ -12,6 +13,32 @@ namespace KrossKlient.ViewModels
     [DataContract]
     public class HomePageViewModel : ReactiveObject, ILoginMethods
     {
+        public HomePageViewModel(IMutableDependencyResolver testResolver = null)
+        {
+            //Blobcache
+            Akavache.BlobCache.ApplicationName = "Kross";
+            RegisterResolver(testResolver);
+            //log stuff
+            // Get credentials
+        }
+
+        private void RegisterResolver(IMutableDependencyResolver testResolver)
+        {
+            if (testResolver == null)
+            {
+                Resolver = Locator.CurrentMutable;
+                Resolver.Register(() => new PuzzlesService(), typeof(IPuzzlesService));
+                Resolver.Register(() => new UserService(), typeof(IUserService)); 
+                Resolver.Register(() => new FakePuzzleRepository(), typeof(IPuzzleRepository));
+            }
+            else
+            {
+                Resolver = testResolver;
+            }
+        }
+
+        public IMutableDependencyResolver Resolver { get; protected set; }
+
         private IPuzzlesService _puzzlesService;
         public IPuzzlesService PuzzlesService
         {
@@ -24,15 +51,6 @@ namespace KrossKlient.ViewModels
         {
             get { return _userService; }
             private set { _userService = value; }
-        }
-
-        public HomePageViewModel(IMutableDependencyResolver testResolver = null)
-        {
-            if (testResolver == null)
-            {
-                PuzzlesService = Locator.Current.GetService<IPuzzlesService>();
-                UserService = Locator.Current.GetService<IUserService>();
-            }
         }
 
 

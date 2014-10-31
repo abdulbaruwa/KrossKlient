@@ -19,10 +19,10 @@ namespace KrossKlient.Services
         private IUserService _userService;
         private readonly IBlobCache _blobCache;
 
-        public PuzzlesService(IPuzzleRepository puzzlesRepository,  IUserService userService, IBlobCache blobCache = null)
+        public PuzzlesService(IBlobCache blobCache = null)
         {
-            this.puzzlesRepository = puzzlesRepository;
-            _userService = userService;
+            this.puzzlesRepository = Locator.Current.GetService<IPuzzleRepository>();
+            _userService = Locator.Current.GetService<IUserService>();
             _blobCache = blobCache ?? Locator.Current.GetService<IBlobCache>();
         }
 

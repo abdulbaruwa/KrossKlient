@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using KrossKlient.DataModel;
 using KrossKlient.ViewModels;
 using KrossKlient.ViewModels.DesignTime;
+using ReactiveUI;
 using Splat;
 
 namespace KrossKlient.Services
@@ -25,7 +26,7 @@ namespace KrossKlient.Services
             //SimpleIoc.Default.Register<IGameDataService, GameDataService.GameDataService>();
         }
 
-        public HomePageViewModel HomePageViewModel
+        public HomePageViewModel AppBootstrapperViewModel
         {
             get { return GetHomePageViewModel(); }
         }
@@ -65,7 +66,7 @@ namespace KrossKlient.Services
 
         private HomePageViewModel GetHomePageViewModel()
         {
-            var puzzles = new ObservableCollection<PuzzleGroup>();
+            var puzzles = new ReactiveList<PuzzleGroup>();
             var sciencegroup = new PuzzleGroup { Name = "Science", Puzzles = new List<PuzzleSubGroup>()};
 
             sciencegroup.Puzzles.Add(PuzzleBuilder("Human Skeleton Puzzles"));
@@ -73,7 +74,6 @@ namespace KrossKlient.Services
             sciencegroup.Puzzles.Add(PuzzleBuilder("Muscle System"));
 
             puzzles.Add(sciencegroup);
-
 
             var englishgroup = new PuzzleGroup {Name = "English", Puzzles = new List<PuzzleSubGroup>() };
 
@@ -98,7 +98,6 @@ namespace KrossKlient.Services
                 Title = title,
                 Words = new Dictionary<string, string>
                 {
-                    
                         {"First","The first"},
                         {"Second", "The Second"},
                         {"Third", "The Third"},
