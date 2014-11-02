@@ -106,7 +106,7 @@
             <HubSection x:Name="HubSection3" MinWidth="600" Header="{Binding Name}"
                DataContext="{Binding PuzzleGroups[2]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
                 <DataTemplate>
-                    <ListView 
+                    <ListView
                         AutomationProperties.AutomationId="ItemListViewSection5"
                         AutomationProperties.Name="Items In Group"
                         SelectionMode="None"

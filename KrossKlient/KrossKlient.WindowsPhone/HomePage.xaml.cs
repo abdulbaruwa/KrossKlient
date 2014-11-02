@@ -3,6 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using KrossKlient.Common;
+using KrossKlient.DataModel;
 using KrossKlient.ViewModels;
 using ReactiveUI;
 
@@ -38,7 +39,6 @@ namespace KrossKlient
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            throw new NotImplementedException();
         }
 
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
@@ -58,7 +58,9 @@ namespace KrossKlient
 
         private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            throw new NotImplementedException();
+            ViewModel.SelectedPuzzleSubGroup = (PuzzleSubGroup) e.ClickedItem;
+            this.Frame.Navigate(typeof(PuzzleBoardView), ViewModel.SelectedPuzzleSubGroup);
+
         }
 
         #region NavigationHelper registration

@@ -71,13 +71,13 @@ namespace KrossKlient.ViewModels
             }
         }
 
-        [DataMember] private PuzzleViewModel _selectedPuzzleViewModel;
-        public PuzzleViewModel SelectedPuzzleGroupViewModel
+        [DataMember] private PuzzleSubGroup _selectedPuzzleSubGroup;
+        public PuzzleSubGroup SelectedPuzzleSubGroup
         {
-            get { return _selectedPuzzleViewModel; }
+            get { return _selectedPuzzleSubGroup; }
             set
             {
-                this.RaiseAndSetIfChanged(ref _selectedPuzzleViewModel, value);
+                this.RaiseAndSetIfChanged(ref _selectedPuzzleSubGroup, value);
             }
         }
 
