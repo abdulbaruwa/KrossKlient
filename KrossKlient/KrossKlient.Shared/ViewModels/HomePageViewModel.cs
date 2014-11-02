@@ -15,13 +15,10 @@ namespace KrossKlient.ViewModels
     {
         public HomePageViewModel(IMutableDependencyResolver testResolver = null)
         {
-            //_puzzleGroups = new ReactiveList<PuzzleGroup>();
-            //Blobcache
             Akavache.BlobCache.ApplicationName = "Kross";
             RegisterResolver(testResolver);
-            //log stuff
+            this.Log().Debug("Kross Klient starting ");
             // Get credentials
-
             FetchLatestGames();
         }
 
@@ -99,7 +96,7 @@ namespace KrossKlient.ViewModels
         private void FetchLatestGames()
         {
             var service = Locator.Current.GetService<IPuzzlesService>();
-            service.GetPuzzlesForUser(CurrentUser).ObserveOn(RxApp.MainThreadScheduler)
+            service.GetPuzzles().ObserveOn(RxApp.MainThreadScheduler)
             .Subscribe(x =>
             {
                 if (x != null)

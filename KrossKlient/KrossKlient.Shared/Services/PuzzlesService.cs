@@ -3,44 +3,41 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Reactive.Linq;
 using Akavache;
 using KrossKlient.Common;
 using KrossKlient.DataModel;
 using KrossKlient.ViewModels;
-using ReactiveUI;
 using Splat;
 
 namespace KrossKlient.Services
 {
     public class PuzzlesService : IPuzzlesService
     {
-        private IPuzzleRepository puzzlesRepository;
-        private IUserService _userService;
         private readonly IBlobCache _blobCache;
+        private readonly IPuzzleRepository puzzlesRepository;
+        private IUserService _userService;
 
         public PuzzlesService(IBlobCache blobCache = null)
         {
-            this.puzzlesRepository = Locator.Current.GetService<IPuzzleRepository>();
+            puzzlesRepository = Locator.Current.GetService<IPuzzleRepository>();
             _userService = Locator.Current.GetService<IUserService>();
             _blobCache = blobCache ?? Locator.Current.GetService<IBlobCache>();
         }
 
         public ObservableCollection<WordViewModel> GetOrdereredWordsForPuzzle(int puzzleId, string user)
         {
-            var words = puzzlesRepository.GetPuzzleWithId(puzzleId, user);
+            Dictionary<string, string> words = puzzlesRepository.GetPuzzleWithId(puzzleId, user);
 
-            var wordviewmodels = GetWordsWordviewmodels(words);
+            List<WordViewModel> wordviewmodels = GetWordsWordviewmodels(words);
 
             return SortWordsByPositionOnBoard(wordviewmodels);
-
         }
 
         public IList<WordViewModel> GetWordsInsertableIntoPuzzle(Dictionary<string, string> words)
         {
             try
             {
-                var wordviewmodels = GetWordsWordviewmodels(words);
+                List<WordViewModel> wordviewmodels = GetWordsWordviewmodels(words);
 
                 return SortWordsByPositionOnBoard(wordviewmodels);
             }
@@ -50,15 +47,15 @@ namespace KrossKlient.Services
             }
         }
 
-        public IObservable<List<PuzzleGroup>> GetPuzzlesForUser(string currentUser)
+        public IObservable<List<PuzzleGroup>> GetPuzzles()
         {
-            IObservable<List<PuzzleGroup>> observableResult = _blobCache.GetObject<List<PuzzleGroup>>("MyGames");
+            IObservable<List<PuzzleGroup>> observableResult = _blobCache.GetObject<List<PuzzleGroup>>("kross");
             return observableResult;
         }
 
         private ObservableCollection<WordViewModel> SortWordsByPositionOnBoard(List<WordViewModel> wordviewmodels)
         {
-            var orderedWords = wordviewmodels.OrderBy(x => x.Index).ToList();
+            List<WordViewModel> orderedWords = wordviewmodels.OrderBy(x => x.Index).ToList();
             int lastindex = orderedWords[0].Index;
             var sortedWordViewModel = new ObservableCollection<WordViewModel>();
 
@@ -88,7 +85,6 @@ namespace KrossKlient.Services
 
         public List<WordViewModel> GetWordsWordviewmodels(Dictionary<string, string> words)
         {
-
             ////var words = new List<string>();
             //words.Add("Bamidele");
             //words.Add("station");
@@ -103,27 +99,27 @@ namespace KrossKlient.Services
             //words.Add("moscow");
             var board = new Board(12);
             board.ProcessWords(words.Keys.ToArray());
-            var result = board.InsertWordResults;
-            var wordsInserted = result.Where(x => x.Inserted);
+            List<InsertWordResult> result = board.InsertWordResults;
+            IEnumerable<InsertWordResult> wordsInserted = result.Where(x => x.Inserted);
             var wordviewmodels = new List<WordViewModel>();
-            foreach (var word in wordsInserted)
+            foreach (InsertWordResult word in wordsInserted)
             {
                 Debug.WriteLine(word);
-                var position = (word.StartCell.Item1*12) + word.StartCell.Item2;
+                int position = (word.StartCell.Item1*12) + word.StartCell.Item2;
 
-                var wordViewModel = new WordViewModel()
+                var wordViewModel = new WordViewModel
                 {
                     Cells = new ObservableCollection<EmptyCellViewModel>(),
                     Direction = word.Direction,
-                    Word = word.Word.ToString(),
+                    Word = word.Word,
                     WordHint = words.First(x => x.Key == word.Word.ToString()).Value,
                     WordLength = "(" + word.Word.Length + ")",
                     Index = position
                 };
 
-                var row = word.StartCell.Item1;
-                var col = word.StartCell.Item2;
-                foreach (var character in word.Word)
+                int row = word.StartCell.Item1;
+                int col = word.StartCell.Item2;
+                foreach (char character in word.Word)
                 {
                     var cell = new CellViewModel(col, row, character.ToString(), wordViewModel, string.Empty);
                     if (word.Direction == Direction.Across)

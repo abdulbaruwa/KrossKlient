@@ -42,7 +42,7 @@ namespace KrossKlient.ViewModels.DesignTime
             throw new NotImplementedException();
         }
 
-        public IObservable<List<PuzzleGroup>> GetPuzzlesForUser(string currentUser)
+        public IObservable<List<PuzzleGroup>> GetPuzzles()
         {
             var puzzles = new List<PuzzleGroup>();
             var sciencegroup = new PuzzleGroup { Name = "Science", Puzzles = new List<PuzzleSubGroup>() };
