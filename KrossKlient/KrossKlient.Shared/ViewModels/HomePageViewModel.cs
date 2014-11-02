@@ -30,6 +30,7 @@ namespace KrossKlient.ViewModels
                 Resolver.Register(() => new FakePuzzlesService(), typeof(IPuzzlesService));
                 Resolver.Register(() => new UserService(), typeof(IUserService)); 
                 Resolver.Register(() => new FakePuzzleRepository(), typeof(IPuzzleRepository));
+                Resolver.Register(() => new PuzzleBoardViewModel(), typeof(PuzzleBoardViewModel));
             }
             else
             {

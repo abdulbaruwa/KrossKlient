@@ -28,6 +28,7 @@ namespace KrossKlient
 
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+            this.ViewModel = new PuzzleBoardViewModel();
         }
 
         object IViewFor.ViewModel

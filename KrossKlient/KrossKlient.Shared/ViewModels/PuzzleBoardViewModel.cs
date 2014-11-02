@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using KrossKlient.Services;
 using ReactiveUI;
+using Splat;
 
 namespace KrossKlient.ViewModels
 {
@@ -24,19 +25,18 @@ namespace KrossKlient.ViewModels
         [DataMember] private bool _wordSelectedVisibility;
         [DataMember] private WordViewModel _selectedWord;
 
-        public PuzzleBoardViewModel()
+        //public PuzzleBoardViewModel()
+        //{
+        //    _cells = new ObservableCollection<EmptyCellViewModel>();
+        //    CreateCellsForBoard();
+        //}
+
+        public PuzzleBoardViewModel(IPuzzlesService puzzlesService = null, IUserService userService = null)
         {
             _cells = new ObservableCollection<EmptyCellViewModel>();
             CreateCellsForBoard();
-        }
-
-        public PuzzleBoardViewModel(IPuzzlesService puzzlesService, IUserService userService)
-        {
-            _cells = new ObservableCollection<EmptyCellViewModel>();
-            CreateCellsForBoard();
-            PuzzlesService = puzzlesService;
-            UserService = userService;
-
+            PuzzlesService = puzzlesService ?? Locator.Current.GetService<IPuzzlesService>();
+            UserService = userService ?? Locator.Current.GetService<IUserService>();
         }
 
         public ObservableCollection<EmptyCellViewModel> Cells
@@ -107,14 +107,6 @@ namespace KrossKlient.ViewModels
             get { return _selectedWord; }
             set { this.RaiseAndSetIfChanged(ref _selectedWord, value); }
         }
-
-        //private publicliclic PuzzleViewModel 
-
-        //private PuzzleViewModel 
-        //{
-        //    get;
-        //    set;
-        //}
 
         private void CreateCellsForBoard()
         {
