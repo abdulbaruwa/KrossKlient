@@ -1,0 +1,41 @@
+﻿   //Cut out ItemsControl for Selected value from Grid.
+   <ItemsControl
+                        Visibility="Visible"
+                        x:Name="wordselected" ItemsSource="{Binding SelectedWord.Cells}" Grid.Row="2" Margin="10,30,10,0" Opacity="0.85" Height="40" VerticalAlignment="Top">
+                <ItemsControl.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <RepositionThemeTransition />
+                    </TransitionCollection>
+                </ItemsControl.ItemContainerTransitions>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderThickness=".5">
+                            <Grid
+                                 Background="{Binding IsVisible, Converter={StaticResource BoolToCellShade},Mode=TwoWay}"
+                                        Width="30"
+                                        Height="44.5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.ColumnSpan="3" FontFamily="Segoi" FontSize="32"
+                                                   Foreground="Red"
+                                                   VerticalAlignment="Top" Padding="0" HorizontalAlignment="Center"
+                                                   Text="{Binding EnteredValue}" Grid.RowSpan="3"
+                                                   Margin="13,7,14,0" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>

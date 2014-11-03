@@ -55,6 +55,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)StuffForMe.txt" />
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en-US\Resourcesy.resw" />
   </ItemGroup>
 </Project>

@@ -7,9 +7,6 @@ using ReactiveUI;
 
 namespace KrossKlient
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class PuzzleBoardView : Page, IViewFor<PuzzleBoardViewModel>
     {
         private NavigationHelper navigationHelper;
@@ -20,6 +17,11 @@ namespace KrossKlient
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+            this.Bind(ViewModel, x => x.Cells, x => x.GameBoard.ItemsSource);
+            this.Bind(ViewModel, x => x.EnteredWord, x => x.AnswerForSelectedWord.Text);
+            this.OneWayBind(ViewModel, x => x.SelectedWord.WordHint, x => x.HintForSelectedWord.Text);
+            this.OneWayBind(ViewModel, x => x.SelectedWordLength, x => x.AnswerForSelectedWord.MaxLength);
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)

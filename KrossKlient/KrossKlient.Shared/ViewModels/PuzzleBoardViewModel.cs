@@ -17,19 +17,13 @@ namespace KrossKlient.ViewModels
         [DataMember] private bool _acrossAndDownVisible;
         [DataMember] private EmptyCellViewModel _currentSelectedCell;
         [DataMember] private string _currentUser;
-        [DataMember] private string _gameCountDown;
         [DataMember] private bool _gameIsRunning;
         [DataMember] private string _gameScoreDisplay;
         [DataMember] private ObservableCollection<WordViewModel> _words;
         [DataMember] private PuzzleViewModel _puzzleViewModel;
         [DataMember] private bool _wordSelectedVisibility;
         [DataMember] private WordViewModel _selectedWord;
-
-        //public PuzzleBoardViewModel()
-        //{
-        //    _cells = new ObservableCollection<EmptyCellViewModel>();
-        //    CreateCellsForBoard();
-        //}
+        [DataMember] private string _enteredWord;
 
         public PuzzleBoardViewModel(IPuzzlesService puzzlesService = null, IUserService userService = null)
         {
@@ -54,12 +48,6 @@ namespace KrossKlient.ViewModels
         {
             get { return _gameIsRunning; }
             set { this.RaiseAndSetIfChanged(ref _gameIsRunning, value); }
-        }
-
-        public string GameCountDown
-        {
-            get { return _gameCountDown; }
-            set { this.RaiseAndSetIfChanged(ref _gameCountDown, value); }
         }
 
         public string GameScoreDisplay
@@ -107,6 +95,24 @@ namespace KrossKlient.ViewModels
             get { return _selectedWord; }
             set { this.RaiseAndSetIfChanged(ref _selectedWord, value); }
         }
+
+        public string EnteredWord
+        {
+            get { return _enteredWord; }
+            set { this.RaiseAndSetIfChanged(ref _enteredWord, value); }
+        }
+
+        readonly ObservableAsPropertyHelper<int> _selectedWordLength;
+        public int SelectedWordLength
+        {
+            get { return _selectedWordLength.Value; }
+        } 
+        
+        readonly ObservableAsPropertyHelper<string> _gameCountDown;
+        public string GameCountDown
+        {
+            get { return _gameCountDown.Value; }
+        } 
 
         private void CreateCellsForBoard()
         {
