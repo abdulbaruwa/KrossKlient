@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Windows.ApplicationModel;
 using KrossKlient.DataModel;
 using KrossKlient.ViewModels;
 using KrossKlient.ViewModels.DesignTime;
-using ReactiveUI;
 using Splat;
 
 namespace KrossKlient.Services
@@ -55,8 +52,6 @@ namespace KrossKlient.Services
                                select word).FirstOrDefault();
 
             vm.GameIsRunning = true;
-
-            vm.GameCountDown = "00:00:00";
 
             vm.AcrossAndDownVisible = true;
 

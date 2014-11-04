@@ -20,8 +20,12 @@ namespace KrossKlient
 
             this.Bind(ViewModel, x => x.Cells, x => x.GameBoard.ItemsSource);
             this.Bind(ViewModel, x => x.EnteredWord, x => x.AnswerForSelectedWord.Text);
+
+            this.Bind(ViewModel, x => x.CurrentSelectedCell, x => x.GameBoard.SelectedItem);
+
             this.OneWayBind(ViewModel, x => x.SelectedWord.WordHint, x => x.HintForSelectedWord.Text);
             this.OneWayBind(ViewModel, x => x.SelectedWordLength, x => x.AnswerForSelectedWord.MaxLength);
+
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)

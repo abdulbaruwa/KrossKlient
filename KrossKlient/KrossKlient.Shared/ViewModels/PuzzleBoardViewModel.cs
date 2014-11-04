@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Runtime.Serialization;
+using KrossKlient.Common;
 using KrossKlient.Services;
 using ReactiveUI;
 using Splat;
@@ -22,7 +24,6 @@ namespace KrossKlient.ViewModels
         [DataMember] private ObservableCollection<WordViewModel> _words;
         [DataMember] private PuzzleViewModel _puzzleViewModel;
         [DataMember] private bool _wordSelectedVisibility;
-        [DataMember] private WordViewModel _selectedWord;
         [DataMember] private string _enteredWord;
 
         public PuzzleBoardViewModel(IPuzzlesService puzzlesService = null, IUserService userService = null)
@@ -31,6 +32,14 @@ namespace KrossKlient.ViewModels
             CreateCellsForBoard();
             PuzzlesService = puzzlesService ?? Locator.Current.GetService<IPuzzlesService>();
             UserService = userService ?? Locator.Current.GetService<IUserService>();
+
+            _selectedWord = this.WhenAny(vm => vm.CurrentSelectedCell, x => x.Value)
+                .Select(x => SetLikelyWordMatchOnBoardForSelectedCell(x))
+                .ToProperty(this, x => x.SelectedWord);
+
+            _selectedWordLength = this.WhenAny(vm => vm._selectedWord, x => x.Value)
+                .Select(x => x.Value.Cells.Count)
+                .ToProperty(this, x => x.SelectedWordLength);
         }
 
         public ObservableCollection<EmptyCellViewModel> Cells
@@ -90,10 +99,10 @@ namespace KrossKlient.ViewModels
             set { this.RaiseAndSetIfChanged(ref _wordSelectedVisibility, value); }
         }
 
+        private readonly ObservableAsPropertyHelper<WordViewModel> _selectedWord;
         public WordViewModel SelectedWord
         {
-            get { return _selectedWord; }
-            set { this.RaiseAndSetIfChanged(ref _selectedWord, value); }
+            get { return _selectedWord.Value; }
         }
 
         public string EnteredWord
@@ -144,6 +153,13 @@ namespace KrossKlient.ViewModels
                     Cells[cellPositionOnBoard] = new CellViewModel(cell.Col, cell.Row, cell.Value, wordViewModel, startPositionForWordOnBoard);
                 }
             }
+        }
+
+        private WordViewModel SetLikelyWordMatchOnBoardForSelectedCell(EmptyCellViewModel value)
+        {
+            var words = Words.Where(x => x.Cells.Count(y => y.Col == value.Col && y.Row == value.Row) > 0);
+            var word = words.FirstOrDefault();
+            return word;
         }
     }
 }
