@@ -40,7 +40,7 @@ namespace KrossKlient.Services
 
         private PuzzleBoardViewModel GetPuzzleBoardViewModel()
         {
-            var vm = new PuzzleBoardViewModel(new FakePuzzlesService(), new FakeUserSevice());
+            var vm = new PuzzleBoardViewModel(0, new FakePuzzlesService(), new FakeUserSevice());
 
             vm.CurrentUser = "Abdulrahaman";
 

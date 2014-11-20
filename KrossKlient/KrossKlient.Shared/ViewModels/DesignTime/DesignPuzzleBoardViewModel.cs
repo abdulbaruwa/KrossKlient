@@ -1,5 +1,3 @@
-using System;
-using System.Linq;
 using KrossKlient.Services;
 
 namespace KrossKlient.ViewModels.DesignTime
@@ -7,7 +5,7 @@ namespace KrossKlient.ViewModels.DesignTime
     public class DesignPuzzleBoardViewModel : PuzzleBoardViewModel
     {
         public DesignPuzzleBoardViewModel()
-            : base(new FakePuzzlesService(), new FakeUserSevice())
+            : base(0, new FakePuzzlesService(), new FakeUserSevice())
         {
             CurrentUser = "Abdulrahaman";
 

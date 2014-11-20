@@ -2,6 +2,7 @@
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using KrossKlient.Common;
+using KrossKlient.DataModel;
 using KrossKlient.ViewModels;
 using ReactiveUI;
 
@@ -34,7 +35,11 @@ namespace KrossKlient
 
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            this.ViewModel = new PuzzleBoardViewModel();
+            if (e.NavigationParameter is PuzzleSubGroup)
+            {
+                var id = ((PuzzleSubGroup) e.NavigationParameter).PuzzleSubGroupId;
+                this.ViewModel = new PuzzleBoardViewModel(id);
+            }
         }
 
         object IViewFor.ViewModel

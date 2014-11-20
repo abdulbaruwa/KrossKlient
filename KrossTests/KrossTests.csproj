@@ -118,6 +118,7 @@
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\MatchesPlayedViewModelTests.cs" />
+    <Compile Include="ViewModels\PuzzleBoardViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

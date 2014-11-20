@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Runtime.Serialization;
-using KrossKlient.Common;
 using KrossKlient.Services;
 using ReactiveUI;
 using Splat;
@@ -26,12 +25,13 @@ namespace KrossKlient.ViewModels
         [DataMember] private bool _wordSelectedVisibility;
         [DataMember] private string _enteredWord;
 
-        public PuzzleBoardViewModel(IPuzzlesService puzzlesService = null, IUserService userService = null)
+        public PuzzleBoardViewModel(int puzzleId, IPuzzlesService puzzlesService = null, IUserService userService = null)
         {
             _cells = new ObservableCollection<EmptyCellViewModel>();
             CreateCellsForBoard();
             PuzzlesService = puzzlesService ?? Locator.Current.GetService<IPuzzlesService>();
             UserService = userService ?? Locator.Current.GetService<IUserService>();
+            //Todo: Load words based on Id. Can the order of steps here have more smarts?
 
             _selectedWord = this.WhenAny(vm => vm.CurrentSelectedCell, x => x.Value)
                 .Where(x => x != null)
@@ -39,6 +39,7 @@ namespace KrossKlient.ViewModels
                 .ToProperty(this, x => x.SelectedWord);
 
             _selectedWordLength = this.WhenAny(vm => vm._selectedWord, x => x.Value)
+                .Where(x => x.Value != null)
                 .Select(x => x.Value.Cells.Count)
                 .ToProperty(this, x => x.SelectedWordLength);
         }
