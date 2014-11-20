@@ -14,13 +14,13 @@ namespace KrossKlient.ViewModels.DesignTime
             PuzzleViewModel = new PuzzleViewModel() {Group = "Science", Title = "Level One"};
             Words = base.PuzzlesService.GetOrdereredWordsForPuzzle(0,CurrentUser);
 
-            SelectedWord = (from word in Words
-                            where word.Word.Equals("india", StringComparison.OrdinalIgnoreCase)
-                            select word).FirstOrDefault();
+            //SelectedWord = (from word in Words
+            //                where word.Word.Equals("india", StringComparison.OrdinalIgnoreCase)
+            //                select word).FirstOrDefault();
 
             GameIsRunning = true;
 
-            GameCountDown = "00:00:00";
+            //GameCountDown = "00:00:00";
 
             AcrossAndDownVisible = true;
             

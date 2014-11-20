@@ -47,9 +47,9 @@ namespace KrossKlient.Services
             vm.PuzzleViewModel = new PuzzleViewModel() { Group = "Science", Title = "Level One" };
             vm.Words = new FakePuzzlesService().GetOrdereredWordsForPuzzle(0, vm.CurrentUser);
 
-            vm.SelectedWord = (from word in vm.Words
-                               where word.Word.Equals("india",StringComparison.OrdinalIgnoreCase)
-                               select word).FirstOrDefault();
+            //vm.SelectedWord = (from word in vm.Words
+            //                   where word.Word.Equals("india",StringComparison.OrdinalIgnoreCase)
+            //                   select word).FirstOrDefault();
 
             vm.GameIsRunning = true;
 

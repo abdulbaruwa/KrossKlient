@@ -34,6 +34,7 @@ namespace KrossKlient.ViewModels
             UserService = userService ?? Locator.Current.GetService<IUserService>();
 
             _selectedWord = this.WhenAny(vm => vm.CurrentSelectedCell, x => x.Value)
+                .Where(x => x != null)
                 .Select(x => SetLikelyWordMatchOnBoardForSelectedCell(x))
                 .ToProperty(this, x => x.SelectedWord);
 
